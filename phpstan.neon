@@ -1,0 +1,11 @@
+includes:
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	excludes_analyse:
+		- %rootDir%/temp/*
+
+	ignoreErrors:
+		- '#^Method Apicart\\Utils\\Arrays::merge\(\) should return array but returns array|string|null\.$#'
+
+	reportUnmatchedIgnoredErrors: FALSE

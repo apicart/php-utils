@@ -1,0 +1,56 @@
+imports:
+    - { resource: 'vendor/symplify/easy-coding-standard/config/psr2.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/php71.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/clean-code.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/symplify.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/common.yml' }
+
+services:
+    # code structure & complexity
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff:
+        absoluteLineLimit: 120
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
+        absoluteComplexity: 10
+    PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\NestingLevelSniff:
+        absoluteNestingLevel: 6
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\FunctionSpacingSniff:
+        spacingBeforeFirst: 1
+        spacingAfterLast: 1
+    SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff:
+        linesCountBeforeFirstUse: 1
+        linesCountAfterLastUse: 2
+    SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff:
+        newlinesCountBetweenOpenTagAndDeclare: 0
+        newlinesCountAfterDeclare: 2
+        spacesCountAroundEqualsSign: 1
+
+    # PHP
+    SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff:
+
+    # Use statements
+    SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff:
+    SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff:
+        searchAnnotations: TRUE
+
+parameters:
+    indentation: tab
+    skip:
+        PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ControlStructureSpacingSniff:
+        Symplify\CodingStandard\Sniffs\DependencyInjection\NoClassInstantiationSniff:
+        Symplify\CodingStandard\Sniffs\Property\DynamicPropertySniff:
+        SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff:
+        PhpCsFixer\Fixer\Operator\NewWithBracesFixer:
+        PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer:
+        Symplify\CodingStandard\Fixer\ClassNotation\LastPropertyAndFirstMethodSeparationFixer:
+        PhpCsFixer\Fixer\Basic\BracesFixer:
+        PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer:
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\Functions\MultiLineFunctionDeclarationSniff:
+        PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer:
+        Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenStaticFunctionSniff:
+        PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff:
+        SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff:
+        PHP_CodeSniffer\Standards\PEAR\Sniffs\Functions\ValidDefaultValueSniff:
+        Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
+        PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
+        Symplify\CodingStandard\Sniffs\Commenting\VarConstantCommentSniff:
+        Symplify\CodingStandard\Sniffs\Architecture\ExplicitExceptionSniff:
