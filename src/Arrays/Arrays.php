@@ -2,35 +2,10 @@
 
 namespace Apicart\Utils\Arrays;
 
+use InvalidArgumentException;
+
 final class Arrays
 {
-
-	/**
-	 * @param array|string|null $left
-	 * @param array|string|null $right
-	 * @return array
-	 */
-	public static function merge($left, $right)
-	{
-		if (is_array($left) && is_array($right)) {
-			foreach ($left as $key => $val) {
-				if (is_int($key)) {
-					$right[] = $val;
-				} else {
-					if (isset($right[$key])) {
-						$val = static::merge($val, $right[$key]);
-					}
-					$right[$key] = $val;
-				}
-			}
-			return $right;
-		} elseif ($left === null && is_array($right)) {
-			return $right;
-		}
-
-		return $left;
-	}
-
 
 	/**
 	 * @param mixed $default
@@ -77,6 +52,72 @@ final class Arrays
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * @param string|int|array $key one or more keys
+	 * @return mixed
+	 * @throws InvalidArgumentException
+	 */
+	public static function &getReference(array &$array, $key)
+	{
+		foreach (is_array($key) ? $key : [$key] as $k) {
+			if (is_array($array) || $array === null) {
+				$array = &$array[$k];
+			} else {
+				throw new InvalidArgumentException('Traversed item is not an array.');
+			}
+		}
+
+		return $array;
+	}
+
+
+	/**
+	 * @param string|array $key
+	 * @param mixed $value
+	 */
+	public static function set(array $haystack, $key, $value, string $keySeparator = '.'): array
+	{
+		if (is_string($key)) {
+			$key = explode($keySeparator, $key);
+		} elseif (! is_array($key)) {
+			$key = [$key];
+		}
+
+		$clone = $haystack;
+		$valueRef = & self::getReference($clone, $key);
+		$valueRef = $value;
+
+		return $clone;
+	}
+
+
+	/**
+	 * @param array|string|null $left
+	 * @param array|string|null $right
+	 * @return array
+	 */
+	public static function merge($left, $right)
+	{
+		if (is_array($left) && is_array($right)) {
+			foreach ($left as $key => $val) {
+				if (is_int($key)) {
+					$right[] = $val;
+				} else {
+					if (isset($right[$key])) {
+						$val = static::merge($val, $right[$key]);
+					}
+					$right[$key] = $val;
+				}
+			}
+			return $right;
+		} elseif ($left === null && is_array($right)) {
+			return $right;
+		}
+
+		return $left;
 	}
 
 }

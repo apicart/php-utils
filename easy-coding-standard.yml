@@ -54,3 +54,4 @@ parameters:
         PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
         Symplify\CodingStandard\Sniffs\Commenting\VarConstantCommentSniff:
         Symplify\CodingStandard\Sniffs\Architecture\ExplicitExceptionSniff:
+        Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenReferenceSniff:

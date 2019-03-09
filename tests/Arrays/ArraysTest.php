@@ -8,29 +8,6 @@ use PHPUnit\Framework\TestCase;
 final class ArraysTest extends TestCase
 {
 
-	public function testMerge(): void
-	{
-		$one = [
-			'a' => 1,
-			'b' => [1, 2, 3],
-			'c' => false,
-		];
-		$two = [
-			'c' => true,
-			'd' => ['a'],
-		];
-
-		$result = Arrays::merge($two, $one);
-
-		self::assertSame([
-			'a' => 1,
-			'b' => [1, 2, 3],
-			'c' => true,
-			'd' => ['a'],
-		], $result);
-	}
-
-
 	public function testGet(): void
 	{
 		$data = [
@@ -67,6 +44,71 @@ final class ArraysTest extends TestCase
 
 		self::assertSame(null, Arrays::get($data, 'tree.center.node'));
 		self::assertSame('Default value', Arrays::get($data, 'tree.center.node', 'Default value'));
+	}
+
+
+	public function testGetReference(): void
+	{
+		$data = [
+			'id' => 12,
+			'tree' => [
+				'left' => [
+					'node' => 'Left node',
+				],
+			],
+		];
+
+		$nodeReference = &$data['tree']['left']['node'];
+		self::assertSame($nodeReference, Arrays::getReference($data, ['tree', 'left', 'node']));
+
+		$idReference = & Arrays::getReference($data, 'id');
+		$idReference = 10;
+		self::assertSame($idReference, $data['id']);
+	}
+
+
+	public function testSet(): void
+	{
+		$data = [
+			'id' => 12,
+			'tree' => [
+				'left' => [
+					'node' => 'Left node',
+				],
+			],
+		];
+
+		$result = Arrays::set($data, 'id', 1);
+		self::assertSame(1, $result['id']);
+
+		$result = Arrays::set($data, 'tree.left.position', 3);
+		self::assertSame(3, $result['tree']['left']['position']);
+
+		$result = Arrays::set($data, 'foo', 'bar');
+		self::assertSame('bar', $result['foo']);
+	}
+
+
+	public function testMerge(): void
+	{
+		$one = [
+			'a' => 1,
+			'b' => [1, 2, 3],
+			'c' => false,
+		];
+		$two = [
+			'c' => true,
+			'd' => ['a'],
+		];
+
+		$result = Arrays::merge($two, $one);
+
+		self::assertSame([
+			'a' => 1,
+			'b' => [1, 2, 3],
+			'c' => true,
+			'd' => ['a'],
+		], $result);
 	}
 
 }

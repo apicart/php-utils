@@ -7,6 +7,9 @@ use InvalidArgumentException;
 final class Hashes
 {
 
+	/**
+	 * @throws InvalidArgumentException
+	 */
 	public static function generate(int $length = 32, string $charList = '0-9a-z'): string
 	{
 		$charList = count_chars(preg_replace_callback('#.-.#', function (array $matches): string {
