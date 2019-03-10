@@ -60,11 +60,17 @@ final class Arrays
 	 * @return mixed
 	 * @throws InvalidArgumentException
 	 */
-	public static function &getReference(array &$array, $key)
+	public static function &getReference(array &$array, $key, string $keySeparator = '.')
 	{
-		foreach (is_array($key) ? $key : [$key] as $k) {
+		if (is_string($key)) {
+			$key = (array) explode($keySeparator, $key);
+		} elseif (! is_array($key)) {
+			$key = [$key];
+		}
+
+		foreach ($key as $index) {
 			if (is_array($array) || $array === null) {
-				$array = &$array[$k];
+				$array = &$array[$index];
 			} else {
 				throw new InvalidArgumentException('Traversed item is not an array.');
 			}

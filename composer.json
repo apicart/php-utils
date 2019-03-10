@@ -1,6 +1,6 @@
 {
 	"name": "apicart/php-utils",
-	"description": "This package provide a small set of useful utilities for simpler development.",
+	"description": "This package provide a small set of useful PHP utilities for simpler development.",
 	"keywords": ["apicart", "php", "utilities"],
 	"license": ["MIT"],
 	"authors": [

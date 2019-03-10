@@ -59,6 +59,7 @@ final class ArraysTest extends TestCase
 		];
 
 		$nodeReference = &$data['tree']['left']['node'];
+		self::assertSame($nodeReference, Arrays::getReference($data, 'tree.left.node'));
 		self::assertSame($nodeReference, Arrays::getReference($data, ['tree', 'left', 'node']));
 
 		$idReference = & Arrays::getReference($data, 'id');

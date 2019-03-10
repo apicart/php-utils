@@ -71,6 +71,52 @@ Arrays::get($data, 'tree.center.node'); // null
 Arrays::get($data, 'tree.center.node', 'Default value'); // Default value
 ```
 
+### Array reference
+
+```php
+<?php
+
+use Apicart\Utils\Arrays\Arrays;
+
+$data = [
+	'tree' => [
+		'left' => [
+			'node' => 'Left node',
+		],
+	],
+];
+
+$nodeReference = & Arrays::getReference($data, 'tree.left.node');
+$nodeReference = 'Foo';
+echo $data['tree']['left']['node']; // "Foo"
+```
+
+### Array set
+
+```php
+<?php
+
+use Apicart\Utils\Arrays\Arrays;
+
+$data = [
+	'id' => 12,
+	'tree' => [
+		'left' => [
+			'node' => 'Left node',
+		],
+	],
+];
+
+$result = Arrays::set($data, 'id', 1);
+echo $result['id']; // 1
+
+$result = Arrays::set($data, 'tree.left.position', 3);
+echo $result['tree']['left']['position']; // 3
+
+$result = Arrays::set($data, 'foo', 'bar');
+echo $result['foo']; // "bar"
+```
+
 ### Collections
 
 ```php
