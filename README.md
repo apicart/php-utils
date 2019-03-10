@@ -1,10 +1,22 @@
-# Apicart/PHP-utils
-
-[![Build Status](https://img.shields.io/travis/apicart/php-utils.svg?style=flat-square)](https://travis-ci.org/apicart/php-utils)
-[![Quality Score](https://img.shields.io/scrutinizer/g/apicart/php-utils.svg?style=flat-square)](https://scrutinizer-ci.com/g/apicart/php-utils)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/apicart/php-utils.svg?style=flat-square)](https://scrutinizer-ci.com/g/apicart/php-utils)
-[![Downloads](https://img.shields.io/packagist/dt/apicart/php-utils.svg?style=flat-square)](https://packagist.org/packages/apicart/php-utils)
-[![Latest stable](https://img.shields.io/github/tag/apicart/php-utils.svg?style=flat-square)](https://packagist.org/packages/apicart/php-utils)
+<h1 align="center">
+  Apicart/PHP-utils
+  <br>
+  <a href="https://travis-ci.org/apicart/php-utils">
+    <img src="https://img.shields.io/travis/apicart/php-utils.svg?style=flat-square" alt="Build Status">
+  </a>
+  <a href="https://scrutinizer-ci.com/g/apicart/php-utils">
+    <img src="https://img.shields.io/scrutinizer/g/apicart/php-utils.svg?style=flat-square" alt="Quality Score">
+  </a>
+  <a href="https://scrutinizer-ci.com/g/apicart/php-utils">
+    <img src="https://img.shields.io/scrutinizer/coverage/g/apicart/php-utils.svg?style=flat-square" alt="Code Coverage">
+  </a>
+  <a href="https://packagist.org/packages/apicart/php-utils">
+    <img src="https://img.shields.io/packagist/dt/apicart/php-utils.svg?style=flat-square" alt="Downloads">
+  </a>
+  <a href="https://packagist.org/packages/apicart/php-utils">
+    <img src="https://img.shields.io/github/tag/apicart/php-utils.svg?style=flat-square" alt="Latest stable">
+  </a>
+</h1>
 
 This package provide a small set of useful utilities for simpler development.
 
