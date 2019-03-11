@@ -88,7 +88,8 @@ final class Arrays
 	{
 		if (is_string($key)) {
 			$key = explode($keySeparator, $key);
-		} elseif (! is_array($key)) {
+		}
+		if (! is_array($key)) {
 			$key = [$key];
 		}
 
