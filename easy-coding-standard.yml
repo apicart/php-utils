@@ -55,3 +55,5 @@ parameters:
         Symplify\CodingStandard\Sniffs\Commenting\VarConstantCommentSniff:
         Symplify\CodingStandard\Sniffs\Architecture\ExplicitExceptionSniff:
         Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenReferenceSniff:
+        Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff:
+        Symplify\CodingStandard\Sniffs\ControlStructure\SprintfOverContactSniff:
