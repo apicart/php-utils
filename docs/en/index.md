@@ -133,19 +133,6 @@ foreach ($collection as $item){
 }
 ```
 
-```php
-<?php
-
-use Apicart\Utils\Arrays\SimpleArrayCollection;
-
-$collection = new SimpleArrayCollection([1, 2, 3]);
-
-foreach ($collection as $item){
-	echo $item; // 1, 2, 3
-}
-```
-
-
 ## Hashes
 
 ### Generating

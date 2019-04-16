@@ -24,6 +24,30 @@ final class CollectionTest extends TestCase
 	}
 
 
+	public function testGetArray(): void
+	{
+		self::assertSame(self::TEST_DATASET, $this->collection->toArray());
+	}
+
+
+	public function testColumn(): void
+	{
+		self::assertSame(null, $this->collection->column());
+	}
+
+
+	public function testFirst(): void
+	{
+		self::assertSame(1, $this->collection->first());
+	}
+
+
+	public function testLast(): void
+	{
+		self::assertSame(false, $this->collection->last());
+	}
+
+
 	public function testGetIterator(): void
 	{
 		$iterator = $this->collection->getIterator();
