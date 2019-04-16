@@ -161,3 +161,33 @@ $hash = Hashes::generate();
 $hash = Hashes::generate(10, 'A-Z');
 // $hash = 'AKUTHNEFPL';
 ```
+
+
+## SQL
+
+### Query Builder
+
+```php
+<?php
+
+use Apicart\Utils\Sql\QueryBuilder;
+
+$queryBuilder = QueryBuilder::create()
+    ->select('a.id, a.name')
+    ->addSelect('a.price')
+    ->from('table', 'a')
+    ->innerJoin('inner_table', 'b', 'b.id = a.id')
+    ->leftJoin('left_table', 'c', 'c.id = b.id')
+    ->where('a.id IN (:ids)')
+    ->andWhere('b.id = :bId')
+    ->orWhere('(c.id IS NULL OR c.id > :minId')
+    ->setParameters([
+        'ids' => [1, 2, 3],
+        'bId' => 'aaa',
+    ])
+    ->setParameter('minId', 0);
+
+$sql = $queryBuilder->getSql();
+$parameters = $queryBuilder->getParameters();
+
+```

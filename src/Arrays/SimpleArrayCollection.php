@@ -41,7 +41,7 @@ final class SimpleArrayCollection implements ArrayAccess, Countable, IteratorAgg
 	public function column(int $index = 0)
 	{
 		$firstRow = $this->first();
-		if ($firstRow !== null) {
+		if (is_array($firstRow) === true) {
 			$values = array_values($firstRow);
 
 			return $values[$index] ?? null;
@@ -52,24 +52,20 @@ final class SimpleArrayCollection implements ArrayAccess, Countable, IteratorAgg
 
 
 	/**
-	 * @return mixed|null
+	 * @return mixed|bool
 	 */
 	public function first()
 	{
-		$first = reset($this->elements);
-
-		return $first ?: null;
+		return reset($this->elements);
 	}
 
 
 	/**
-	 * @return mixed|null
+	 * @return mixed|bool
 	 */
 	public function last()
 	{
-		$last = end($this->elements);
-
-		return $last ?: null;
+		return end($this->elements);
 	}
 
 
@@ -83,24 +79,20 @@ final class SimpleArrayCollection implements ArrayAccess, Countable, IteratorAgg
 
 
 	/**
-	 * @return mixed|null
+	 * @return mixed|bool
 	 */
 	public function next()
 	{
-		$next = next($this->elements);
-
-		return $next ?: null;
+		return next($this->elements);
 	}
 
 
 	/**
-	 * @return mixed|null
+	 * @return mixed|bool
 	 */
 	public function current()
 	{
-		$current = current($this->elements);
-
-		return $current ?: null;
+		return current($this->elements);
 	}
 
 
