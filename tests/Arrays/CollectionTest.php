@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 final class CollectionTest extends TestCase
 {
 
-	private const TEST_DATASET = [1, 'b', false];
+	private const TEST_DATASET = [1, 'b', false, 'a'];
 
 	/**
 	 * @var Collection
@@ -44,7 +44,7 @@ final class CollectionTest extends TestCase
 
 	public function testLast(): void
 	{
-		self::assertSame(false, $this->collection->last());
+		self::assertSame('a', $this->collection->last());
 	}
 
 

@@ -51,13 +51,15 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
 
 
 	/**
-	 * @return mixed|bool
+	 * @return mixed|null
 	 */
 	public function first()
 	{
 		$this->initialize();
 
-		return reset($this->loadedData);
+		$first = reset($this->loadedData);
+
+		return $first ?: null;
 	}
 
 
@@ -68,7 +70,9 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
 	{
 		$this->initialize();
 
-		return end($this->loadedData);
+		$last = end($this->loadedData);
+
+		return $last ?: null;
 	}
 
 
@@ -84,24 +88,28 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
 
 
 	/**
-	 * @return mixed|bool
+	 * @return mixed|null
 	 */
 	public function next()
 	{
 		$this->initialize();
 
-		return next($this->loadedData);
+		$next = next($this->loadedData);
+
+		return $next ?: null;
 	}
 
 
 	/**
-	 * @return mixed|bool
+	 * @return mixed|null
 	 */
 	public function current()
 	{
 		$this->initialize();
 
-		return current($this->loadedData);
+		$current = current($this->loadedData);
+
+		return $current ?: null;
 	}
 
 
