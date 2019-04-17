@@ -2,8 +2,13 @@
 
 namespace Apicart\Utils\Sql;
 
+use Apicart\Utils\Exception\Sql\InvalidParamsFormaterForQueryBuilderException;
+
 final class QueryBuilder
 {
+
+	public const PARAMS_FORMAT_BIND = 'bind';
+	public const PARAMS_FORMAT_DOCTRINE = 'doctrine';
 
 	/**
 	 * @var string|int|null
@@ -211,7 +216,7 @@ final class QueryBuilder
 	}
 
 
-	public function getSql(): string
+	public function getSql(string $paramsFormat = self::PARAMS_FORMAT_BIND): string
 	{
 		$sql = 'SELECT ';
 
@@ -262,7 +267,7 @@ final class QueryBuilder
 			$sql .= 'OFFSET ' . $this->offset;
 		}
 
-		return $this->replaceParameters($sql);
+		return $this->replaceParameters($sql, $paramsFormat);
 	}
 
 
@@ -345,18 +350,18 @@ final class QueryBuilder
 	}
 
 
-	private function replaceParameters(string $sql): string
+	private function replaceParameters(string $sql, string $paramsFormat): string
 	{
 		$userParameters = $this->getParameters();
 		$newParameters = [];
 
 		$parametrizedSql = preg_replace_callback(
 			'#([ (]+):([a-zA-Z0-9]+)#',
-			function ($match) use (&$newParameters, $userParameters) {
+			function ($match) use (&$newParameters, $userParameters, $paramsFormat) {
 				$newParameter = $userParameters[$match[2]];
 
-				// expand array parameter into string of parameters e.g. $1,$2,$3...
-				if (is_array($newParameter)) {
+				if ($paramsFormat === self::PARAMS_FORMAT_BIND && is_array($newParameter)) {
+					// expand array parameter into string of parameters e.g. $1,$2,$3...
 					$output = $match[1];
 					foreach ($newParameter as $data) {
 						$newParameters[] = $data;
@@ -369,7 +374,13 @@ final class QueryBuilder
 
 				$newParameters[] = $newParameter;
 
-				return sprintf('%s$%d', $match[1], count($newParameters));
+				if ($paramsFormat === self::PARAMS_FORMAT_BIND) {
+					return sprintf('%s$%d', $match[1], count($newParameters));
+				} elseif ($paramsFormat === self::PARAMS_FORMAT_DOCTRINE) {
+					return sprintf('%s?', $match[1]);
+				}
+					throw new InvalidParamsFormaterForQueryBuilderException;
+
 			},
 			$sql
 		);
