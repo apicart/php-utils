@@ -380,7 +380,6 @@ final class QueryBuilder
 					return sprintf('%s?', $match[1]);
 				}
 					throw new InvalidParamsFormaterForQueryBuilderException;
-
 			},
 			$sql
 		);
