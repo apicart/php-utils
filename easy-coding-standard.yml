@@ -16,6 +16,8 @@ services:
     PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\FunctionSpacingSniff:
         spacingBeforeFirst: 1
         spacingAfterLast: 1
+    Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
+        maxCognitiveComplexity: 10
     SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff:
         linesCountBeforeFirstUse: 1
         linesCountAfterLastUse: 2
